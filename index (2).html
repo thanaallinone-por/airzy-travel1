@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Airzy Travel | เอกสารเดินทาง จองตั๋วเครื่องบิน โรงแรม แผนการเดินทาง</title>
+
+<meta name="description" content="บริการเอกสารเดินทาง จองตั๋วเครื่องบิน โรงแรม และแผนการเดินทาง จัดทำรวดเร็ว ใช้งานประกอบการเดินทางได้">
+<meta name="keywords" content="จองตั๋วเครื่องบิน, booking, โรงแรม, itinerary, เอกสารเดินทาง">
+
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+box-sizing:border-box;
+}
+
+body{
+margin:0;
+font-family:'Kanit',sans-serif;
+background: #f4f7f6 !important; /* ปรับพื้นหลังหลักของทั้งเว็บเป็นสีสว่างเคลียร์ */
+color:#334155; 
+overflow-x:hidden;
+}
+
+/* BACKGROUND ANIMATION */
+.bg{
+position:fixed;
+width:100%;
+height:100%;
+top:0;
+left:0;
+pointer-events:none;
+z-index:0;
+overflow:hidden;
+background: #f4f7f6 !important; /* บังคับให้พื้นหลังเป็นสีสว่าง */
+}
+
+.fly{
+position:absolute;
+font-size:26px;
+opacity:0.3; 
+animation:move 18s linear infinite;
+}
+
+@keyframes move{
+0%{
+transform:translateX(-10%) translateY(10vh);
+}
+100%{
+transform:translateX(110vw) translateY(80vh);
+}
+}
+
+/* HERO (โซนด้านบนสุด) */
+.hero{
+position:relative;
+z-index:2;
+background: linear-gradient(135deg, #e3f2fd 0%, #fff9db 100%) !important; /* เปลี่ยนเป็นสีฟ้าพาสเทลละมุนตัดครีมเหลืองอ่อนๆ น่ารักมาก */
+text-align:center;
+padding:60px 20px;
+overflow:hidden;
+border-bottom: 1px solid #e2e8f0;
+}
+
+.hero-logo{
+max-width:110px;
+height:auto;
+margin-bottom:15px;
+border-radius:50px;
+box-shadow: 0 4px 15px rgba(0,0,0,0.06); 
+border: 4px solid white;
+}
+
+.hero h1{
+font-size:2.6rem;
+margin:0;
+color:#0288d1; 
+font-weight: 700;
+text-shadow: 1px 1px 0px white;
+}
+
+.hero p{
+opacity:0.9;
+font-size:1rem;
+color:#4a5568;
+margin-top: 8px;
+font-weight: 500;
+}
+
+/* FLOAT LINE BUTTON */
+.float{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#06C755;
+padding:12px 20px;
+border-radius:50px;
+color:white;
+text-decoration:none;
+font-weight:bold;
+z-index:999;
+font-size:14px;
+box-shadow: 0 4px 15px rgba(6, 199, 85, 0.3);
+transition: transform 0.2s;
+}
+.float:hover {
+transform: scale(1.05);
+}
+
+/* CONTAINER */
+.container{
+position:relative;
+z-index:2;
+max-width:680px; 
+margin:auto;
+padding:30px 20px;
+}
+
+/* CARD มินิมอล */
+.card{
+background: #ffffff !important; /* บังคับให้กล่องเป็นการ์ดสีขาวล้วนคลีนๆ */
+padding:28px;
+border-radius:24px;
+margin-bottom:22px;
+border:1px solid #e2e8f0;
+box-shadow: 0 8px 24px rgba(149, 157, 165, 0.1); /* เงาฟูๆ นุ่มๆ สไตล์เกาหลี */
+}
+
+h2{
+color:#0288d1;
+margin-top:0;
+font-size: 1.35rem;
+font-weight: 600;
+}
+
+.highlight{
+background:#f0f7ff; 
+padding:14px;
+border-left:4px solid #00b0ff;
+margin:15px 0;
+border-radius:12px;
+color: #0277bd;
+font-weight: 500;
+}
+
+/* BUTTON ในการ์ด */
+.btn{
+display:block;
+text-align: center;
+margin-top:15px;
+padding:12px 22px;
+background:#e1f5fe; 
+color:#0288d1;
+border-radius:16px;
+text-decoration:none;
+font-weight:600;
+transition: all 0.2s;
+box-shadow: 0 2px 6px rgba(2, 136, 209, 0.08);
+}
+.btn:hover{
+background: #00b0ff;
+color: white;
+}
+
+/* INPUT & TEXTAREA */
+input,textarea{
+width:100%;
+padding:14px;
+margin:8px 0;
+border-radius:14px;
+border:1px solid #cbd5e1;
+font-family:'Kanit',sans-serif;
+background:#f8fafc;
+color:#334155;
+outline: none;
+}
+input:focus, textarea:focus {
+border-color: #00b0ff;
+background: #fff;
+box-shadow: 0 0 0 3px rgba(0, 176, 255, 0.15);
+}
+
+/* BUTTON สั่งงาน */
+button{
+width:100%;
+padding:14px;
+margin-top:10px;
+background:#06C755;
+border:none;
+border-radius:14px;
+font-weight:bold;
+color:white;
+font-size:1rem;
+cursor:pointer;
+box-shadow: 0 4px 12px rgba(6, 199, 85, 0.2);
+}
+
+/* FAQ */
+.faq{
+margin-top:10px;
+padding:15px;
+background:#f8fafc;
+border-radius:14px;
+border: 1px solid #e2e8f0;
+}
+.faq p {
+margin: 5px 0 0 0;
+color: #64748b;
+}
+
+/* DOCUMENT LIST */
+.doc-list{
+padding-left:20px;
+line-height:2;
+color: #475569;
+}
+
+/* POPUP */
+.popup{
+position:fixed;
+bottom:72px;
+right:15px;
+background:white;
+color:#334155;
+padding:12px;
+border-radius:16px;
+z-index:999;
+display:none;
+width:140px;
+box-shadow:0 10px 25px rgba(0,0,0,0.08);
+font-size:11px;
+border: 1px solid #e2e8f0;
+}
+
+.popup h3{
+margin:0;
+font-size:12px;
+color:#0288d1;
+}
+
+.popup p{
+font-size:10px;
+margin:4px 0;
+line-height:1.3;
+color: #64748b;
+}
+
+.popup button{
+width:100%;
+margin-top:6px;
+padding:6px;
+background:#06C755;
+border:none;
+color:white;
+border-radius:8px;
+font-size:10px;
+cursor:pointer;
+}
+
+.close-popup{
+position:absolute;
+top:4px;
+right:8px;
+cursor:pointer;
+font-size:11px;
+font-weight:bold;
+color: #94a3b8;
+}
+
+footer{
+text-align:center;
+padding:40px;
+opacity:0.6;
+color: #475569;
+font-size: 0.9rem;
+}
+
+@media(max-width:768px){
+.hero h1{
+font-size:2.1rem;
+}
+.popup{
+width:125px;
+padding:10px;
+right:10px;
+bottom:70px;
+}
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- BACKGROUND -->
+<div class="bg">
+<div class="fly" style="top:10%">✈️</div>
+<div class="fly" style="top:35%;animation-delay:3s">🧳</div>
+<div class="fly" style="top:65%;animation-delay:6s">📘</div>
+<div class="fly" style="top:80%;animation-delay:9s">🛂</div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <a href="https://ibb.co/bRspxrCC" target="_blank">
+    <img src="https://i.ibb.co/6JH624TT/1779158015812.jpg" alt="Airzy Travel Logo" class="hero-logo" border="0">
+  </a>
+  <h1>Airzy Travel</h1>
+  <p>บริการเอกสารเดินทาง | จองตั๋วเครื่องบิน | โรงแรม | แผนการเดินทาง</p>
+</div>
+
+<div class="container">
+
+<!-- TRUST -->
+<div class="card">
+<h2>✔ ระบบเอกสารเดินทางมาตรฐาน</h2>
+<p style="line-height: 1.8; color: #475569;">
+✨ ระบบจัดเตรียมเอกสารเดินทางแบบมืออาชีพ<br>
+✨ มีข้อมูลการจองตามมาตรฐานสายการบิน<br>
+✨ รองรับการใช้งานด้านการเดินทาง<br>
+✨ จัดทำรวดเร็วภายในระยะเวลาไม่นาน
+</p>
+</div>
+
+<!-- SERVICE 1 -->
+<div class="card">
+<h2>✈️ จองตั๋วเครื่องบิน (Booking Confirmation)</h2>
+<div class="highlight">
+PNR และข้อมูลการจองตามระบบสายการบิน
+</div>
+<p style="color: #64748b;">
+เอกสารยืนยันการเดินทาง ใช้ประกอบแผนเดินทาง
+</p>
+<a class="btn" href="https://lin.ee/YHdEbnC">
+สั่งทำจองตั๋วเครื่องบิน
+</a>
+</div>
+
+<!-- SERVICE 2 -->
+<div class="card">
+<h2>🛂 ลงทะเบียนข้อมูลเดินทาง</h2>
+<div class="highlight">
+จัดรูปแบบข้อมูลตามมาตรฐานตรวจคนเข้าเมือง
+</div>
+<p style="color: #64748b;">
+บริการจัดข้อมูลการเดินทางเข้า-ออกประเทศ
+</p>
+<a class="btn" href="https://lin.ee/YHdEbnC">
+สั่งลงทะเบียน
+</a>
+</div>
+
+<!-- SERVICE 3 -->
+<div class="card">
+<h2>🏨 จองโรงแรม</h2>
+<p style="color: #64748b;">
+เอกสารยืนยันการเข้าพักรูปแบบภาษาอังกฤษ
+</p>
+<a class="btn" href="https://lin.ee/YHdEbnC">
+สั่งจองโรงแรม
+</a>
+</div>
+
+<!-- SERVICE 4 -->
+<div class="card">
+<h2>🗺️ Travel Itinerary</h2>
+<p style="color: #64748b;">
+แผนการเดินทางรายวันรูปแบบสากล
+</p>
+<a class="btn" href="https://lin.ee/YHdEbnC">
+สั่งทำแผนเที่ยว
+</a>
+</div>
+
+<!-- DOCUMENT -->
+<div class="card">
+<h2>📄 เอกสารที่ต้องเตรียม</h2>
+<div class="highlight">
+เพื่อความถูกต้องและรวดเร็วในการจัดทำ
+</div>
+<ul class="doc-list">
+<li>📌 หน้าพาสปอร์ต (ต้องชัดเจนและยังไม่หมดอายุ)</li>
+<li>📌 วันเดินทาง (ระบุวันไปและวันกลับ)</li>
+<li>📌 เมืองต้นทาง / ปลายทาง</li>
+<li>📌 สายการบินที่ต้องการ (ถ้ามี)</li>
+<li>📌 อีเมล / เบอร์โทรศัพท์</li>
+</ul>
+</div>
+
+<!-- FAQ -->
+<div class="card">
+<h2>❓ คำถามที่พบบ่อย</h2>
+<div class="faq">
+<b>Q: PNR ใช้ได้ไหม?</b>
+<p>ตรวจสอบได้ในช่วง active ครับ</p>
+</div>
+<div class="faq">
+<b>Q: ใช้เวลากี่นาที?</b>
+<p>ประมาณ 10–30 นาทีเท่านั้นจ้า</p>
+</div>
+</div>
+
+<!-- FORM -->
+<div class="card">
+<h2>📩 สั่งงาน</h2>
+<input id="name" placeholder="ชื่อ-นามสกุล">
+<input id="passport" placeholder="เลขพาสปอร์ต">
+<input id="date" placeholder="วันเดินทาง (เช่น 20-25 ม.ค.)">
+<textarea id="detail" placeholder="รายละเอียดเพิ่มเติมที่ต้องการแจ้ง..." rows="3"></textarea>
+<button onclick="send()">
+ส่งข้อมูลไป LINE
+</button>
+</div>
+
+</div>
+
+<!-- FLOAT LINE -->
+<a class="float" href="https://line.me/R/ti/p/@147wfwkt">
+💬 LINE คุยกับเรา
+</a>
+
+<!-- POPUP -->
+<div class="popup" id="popup">
+<div class="close-popup" onclick="closePopup()">✕</div>
+<h3>✈️ เอกสารด่วน</h3>
+<p>ทัก LINE หาเราได้เลยนะคะ</p>
+<button onclick="goLine()">เปิด LINE</button>
+</div>
+
+<script>
+function send(){
+let name=document.getElementById("name").value;
+let passport=document.getElementById("passport").value;
+let date=document.getElementById("date").value;
+let detail=document.getElementById("detail").value;
+
+let msg=
+`Airzy Order
+
+Name: ${name}
+Passport: ${passport}
+Date: ${date}
+Detail: ${detail}`;
+
+window.location.href=
+"https://line.me/R/msg/text/?"+encodeURIComponent(msg);
+}
+
+function goLine(){
+window.location.href="https://line.me/R/ti/p/@147wfwkt";
+}
+
+function closePopup(){
+document.getElementById("popup").style.display="none";
+}
+
+setTimeout(()=>{
+document.getElementById("popup").style.display="block";
+},2500);
+</script>
+
+<footer>
+© 2026 Airzy Travel
+</footer>
+
+</body>
+</html>
